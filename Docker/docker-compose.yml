@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:13
-    container_name: postgres_container
+    image: postgres:latest
+    container_name: postgres-tadb-examen01
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}

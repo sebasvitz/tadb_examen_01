@@ -72,12 +72,13 @@ Este proyecto consiste en el desarrollo de una aplicación empresarial utilizand
 
 ## Tecnologías Utilizadas
 
-- **Docker**: Para crear contenedores y ejecutar la base de datos de forma aislada.
-- **Railway**: Para manejar la base de datos en la nube.
+- **Docker**: Para crear la base de datos en un contenedor.
+- **Railway**: Para crear la base de datos en la nube.
 - **Dbeaver**: Para acceder a ambas bases de datos.
 
 ## Requisitos
 
-- Tener **Docker** instalado (si se utiliza Docker para bases de datos locales).
+- Tener **Docker** instalado.
 - Tener una cuenta en **Railway** para la base de datos en la nube.
-- (Opcional) Tener configurado un cliente como **DBeaver** para conectarse a la base de datos.
+- configurar un cliente como **DBeaver** para conectarse a la base de datos.
+  

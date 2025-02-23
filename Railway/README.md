@@ -24,6 +24,8 @@ Después de crear la base de datos, Railway te proporcionará una URL de conexi�
 
 mysql://user:password@hostname:3306/dbname?sslmode=require
 
+
+
 ## Pasos para conectarse desde DBeaver
 
 

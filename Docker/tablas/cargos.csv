@@ -1,0 +1,22 @@
+id;nombre_cargo;remuneracion_quincena;id_departamento
+1;Director de Proyecto;2750;1
+2;Líder  Técnico;2250;1
+3;Líder Financiero;2150;1
+4;Arquitecto UX;2000;2
+5;Diseñador UI;1650;2
+6;Investigador UX;1800;2
+7;Diseñador de Interacción;1650;2
+8;Arquitecto de Soluciones;2500;3
+9;Arquitecto de Datos;2250;3
+10;Ingeniero de Datos;2000;3
+11;Especialista APIs;2000;3
+12;Arquitecto de Seguridad;2500;4
+13;Analista de Seguridad;2000;4
+14;Ingeniero Pruebas Seguridad;1750;4
+15;Líder Equipo (Máster);1800;5
+16;Desarrollador Senior;2300;5
+17;Desarrollador Junior;1600;5
+18;Analista de Calidad;1500;5
+19;Arquitecto DevOps;2500;6
+20;Ingeniero SRE;1900;6
+21;Analista Mesa de Ayuda;1200;6

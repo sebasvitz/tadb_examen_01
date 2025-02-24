@@ -34,14 +34,14 @@ COMMENT ON COLUMN cargos.id_departamento IS 'Clave foránea que referencia al de
 
 CREATE TABLE equipos (
     id SERIAL PRIMARY KEY,
-    id_departamentos INT NOT NULL,
+    id_departamento INT NOT NULL,
     nom_equipo VARCHAR(50) NOT NULL,
     CONSTRAINT fk_equipo_departamento FOREIGN KEY (id_departamento) REFERENCES departamentos(id)
 );
 
 COMMENT ON TABLE equipos IS 'Almacena los equipos de trabajo y su relación con los departamentos.';
 COMMENT ON COLUMN equipos.id IS 'Id de los equipos ';
-COMMENT ON COLUMN equipos.id_departamentos IS 'Clave foránea que referencia al departamento al que pertenece el equipo.';
+COMMENT ON COLUMN equipos.id_departamento IS 'Clave foránea que referencia al departamento al que pertenece el equipo.';
 COMMENT ON COLUMN equipos.nom_equipo IS 'Nombre del equipo.';
 
 -- Tabla empleados

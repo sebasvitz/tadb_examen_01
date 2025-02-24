@@ -117,3 +117,32 @@ COMMENT ON TABLE pagosQuincenales IS 'Registra los pagos a los empleados en cada
 COMMENT ON COLUMN pagosQuincenales.id IS 'Id de los pagos de la quincena';
 COMMENT ON COLUMN pagosQuincenales.id_empleado IS 'Clave foránea que referencia al empleado que recibe el pago.';
 COMMENT ON COLUMN pagosQuincenales.id_sprint IS 'Clave foránea que referencia al sprint correspondiente al pago.';
+
+---------------------------CONSULTAS ------------------------------------------------
+
+-- Añadir datos en la tabla pagosQuincenales. 
+
+INSERT INTO pagosQuincenales (id_empleado, id_sprint, monto)
+SELECT 
+    e.id AS id_empleado, 
+    s.id AS id_sprint, 
+    c.remuneracion_quincena AS monto
+FROM empleados e
+JOIN equipos eq ON e.id_equipo = eq.id
+JOIN asignacionEquipo_PI a ON eq.id = a.id_equipo
+JOIN pis p ON a.id_pi = p.id
+JOIN sprints s ON p.id = s.id_pi
+JOIN cargos c ON e.id_cargo = c.id
+ORDER BY e.id, s.id;
+
+---Calcular la nómina para cada quincena, especificando cuanto se pagó a cuantas personas de cuáles cargos.
+SELECT 
+    p.id_sprint AS quincena,
+    c.nombre_cargo AS cargo,
+    COUNT(e.id) AS cantidad_empleados,
+    SUM(p.monto) AS total_pagado
+FROM pagosquincenales p
+JOIN empleados e ON p.id_empleado = e.id
+JOIN cargos c ON e.id_cargo = c.id
+GROUP BY p.id_sprint, c.nombre_cargo 
+ORDER BY p.id_sprint, c.nombre_cargo;

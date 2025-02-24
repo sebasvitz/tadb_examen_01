@@ -137,12 +137,42 @@ ORDER BY e.id, s.id;
 
 ---Calcular la nómina para cada quincena, especificando cuanto se pagó a cuantas personas de cuáles cargos.
 SELECT 
-    p.id_sprint AS quincena,
-    c.nombre_cargo AS cargo,
-    COUNT(e.id) AS cantidad_empleados,
-    SUM(p.monto) AS total_pagado
-FROM pagosquincenales p
-JOIN empleados e ON p.id_empleado = e.id
+    pq.id AS id_quincena,  
+    c.nombre_cargo,
+    COUNT(e.id) AS total_empleados, 
+    SUM(c.remuneracion_quincena) AS total_pagado
+FROM pagosQuincenales pq
+JOIN empleados e ON pq.id_empleado = e.id
 JOIN cargos c ON e.id_cargo = c.id
-GROUP BY p.id_sprint, c.nombre_cargo 
-ORDER BY p.id_sprint, c.nombre_cargo;
+JOIN sprints s ON pq.id_sprint = s.id  
+JOIN pis p ON s.id_pi = p.id  
+GROUP BY pq.id, c.nombre_cargo
+ORDER BY pq.id, total_pagado DESC;
+
+
+
+---cantidad de empleados en cada departamento
+
+SELECT d.nom_departamento, COUNT(e.id) AS total_empleados
+FROM empleados e
+JOIN cargos c ON e.id_cargo = c.id
+JOIN departamentos d ON c.id_departamento = d.id
+GROUP BY d.nom_departamento;
+
+
+
+
+--totalice para cada cargo, cuantas personas se contrataron y cuanto fue el total que se le pagó durante todo el proyecto.
+SELECT 
+    c.nombre_cargo,
+    COUNT(DISTINCT e.id) AS total_personas_contratadas,
+    SUM(c.remuneracion_quincena * sub.quincenas_trabajadas) AS total_pagado
+FROM empleados e
+JOIN cargos c ON e.id_cargo = c.id
+JOIN (
+    SELECT pq.id_empleado, COUNT(DISTINCT pq.id) AS quincenas_trabajadas
+    FROM pagosQuincenales pq
+    GROUP BY pq.id_empleado
+) AS sub ON e.id = sub.id_empleado
+GROUP BY c.nombre_cargo
+ORDER BY total_pagado DESC;

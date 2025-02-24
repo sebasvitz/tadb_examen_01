@@ -36,7 +36,7 @@ CREATE TABLE equipos (
     id SERIAL PRIMARY KEY,
     id_departamentos INT NOT NULL,
     nom_equipo VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_equipo_departamento FOREIGN KEY (id_departamentos) REFERENCES departamentos(id)
+    CONSTRAINT fk_equipo_departamento FOREIGN KEY (id_departamento) REFERENCES departamentos(id)
 );
 
 COMMENT ON TABLE equipos IS 'Almacena los equipos de trabajo y su relación con los departamentos.';

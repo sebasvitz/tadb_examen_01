@@ -1,37 +1,87 @@
-# Hecho por
-Sebastián Villa Vargas 000505962
-
 # Configuración de la Base de Datos en Railway
 
-Este directorio contiene los archivos necesarios para configurar y conectarse a una base de datos en la nube utilizando **Railway**.
+## Hecho por
+**Sebastián Villa Vargas** - 000505962
+
+## Tabla de Contenidos
+
+- [Configuración de la Base de Datos en Railway](#configuración-de-la-base-de-datos-en-railway)
+  - [Hecho por](#hecho-por)
+  - [Tabla de Contenidos](#tabla-de-contenidos)
+  - [Requisitos](#requisitos)
+  - [Configuración en Railway](#configuración-en-railway)
+    - [1. Crear la Base de Datos](#1-crear-la-base-de-datos)
+    - [2. Obtener URL de Conexión](#2-obtener-url-de-conexión)
+  - [Conexión desde DBeaver](#conexión-desde-dbeaver)
+    - [Configuración Básica](#configuración-básica)
+    - [Configuración SSL](#configuración-ssl)
+  - [Notas Adicionales](#notas-adicionales)
+
+
+
+---
 
 ## Requisitos
+- Cuenta en [Railway](https://railway.app)
+- Archivo `.env` configurado con credenciales de Railway
+- Cliente de base de datos como [DBeaver](https://dbeaver.io/download/) (recomendado)
 
-- Tener una cuenta en **Railway** (https://railway.app).
-- Tener configurado un archivo `.env` con las credenciales de la base de datos de Railway.
-- (Opcional) Usar un cliente de base de datos como **DBeaver** o **MySQL Workbench** para conectarse.
+---
 
-## Pasos para Crear y Configurar la Base de Datos en Railway
+## Configuración en Railway
 
-### 1. Crear la Base de Datos en Railway
+### 1. Crear la Base de Datos
+1. Inicia sesión en [Railway](https://railway.app)
+2. Crea un nuevo proyecto
+3. Agrega un servicio de base de datos:
+   - Selecciona MySQL/PostgreSQL
+   - Railway generará automáticamente una **URL de conexión**
 
-1. Accede a tu cuenta de Railway: [https://railway.app](https://railway.app).
-2. Crea un nuevo proyecto desde el panel de control.
-3. Dentro de tu proyecto, agrega una nueva **base de datos**.
-   - Selecciona el tipo de base de datos que deseas usar (por ejemplo, MySQL o PostgreSQL).
-   - Railway generará una **URL de conexión** que contiene todas las credenciales necesarias.
+### 2. Obtener URL de Conexión
+La URL tendrá este formato:
 
-### 2. Obtener la URL de Conexión
+mysql://usuario:contraseña@host-railway:3306/nombre_db?sslmode=require
 
-Después de crear la base de datos, Railway te proporcionará una URL de conexión similar a estas:
+## Conexión desde DBeaver
 
-mysql://user:password@hostname:3306/dbname?sslmode=require
+### Configuración Básica
+Abre DBeaver → Nueva conexión (icono de base de datos +)
 
+Selecciona MySQL
 
+Configura:
+URL: jdbc:mysql://<host>:<port>/<database>
+Usuario: <usuario>
+Contraseña: <contraseña>
 
-## Pasos para conectarse desde DBeaver
+### Configuración SSL
 
+Ve a la pestaña SSL
 
-### 1. Conección a la base de datos
+Configura:
+Modo SSL: Require
+Verify Server Certificate: false
 
+Importante: Railway usa certificados SSL automáticos. No necesitas cargar archivos CA.
 
+## Notas Adicionales
+
+1 Formato JDBC:
+Usa siempre este formato para MySQL:
+
+jdbc:mysql://host:puerto/base_de_datos
+
+2 Firewall:
+Railway no requiere configuración de firewall. Si tienes errores de conexión:
+
+Verifica la URL
+
+Revisa las credenciales
+
+Prueba desde otra red
+
+Reinicio de servicio:
+Si modificas el .env, reinicia DBeaver para aplicar cambios.
+
+Backups automáticos:
+Railway realiza backups diarios. No necesitas configuración adicional.

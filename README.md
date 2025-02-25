@@ -5,6 +5,11 @@ Natalia Urrego 000365937
 Sebastián Villa 000505962
 
 # Estructura del proyecto: 
+El proyecto está dividido en dos carpetas;
+- Docker
+- Railway
+en cada carpeta se encuentra la base de datos en su respectivo entorno y con sus respectivos documentos 
+
 ## Resumen del Dominio del Problema
 
 Este proyecto consiste en el desarrollo de una aplicación empresarial utilizando metodologías ágiles (5 PIs de 5 sprints cada uno, sprints de 2 semanas, para un total de 50 semanas) para la gestión de empleados y el cálculo de costos.

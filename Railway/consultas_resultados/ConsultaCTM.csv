@@ -1,0 +1,22 @@
+"id","nombre_cargo","total_empleados","total_pagado"
+1,Director de Proyecto,1,68750.00
+2,Líder  Técnico,1,56250.00
+3,Líder Financiero,1,53750.00
+4,Arquitecto UX,1,20000.00
+5,Diseñador UI,1,16500.00
+6,Investigador UX,1,18000.00
+7,Diseñador de Interacción,1,16500.00
+8,Arquitecto de Soluciones,1,37500.00
+9,Arquitecto de Datos,1,33750.00
+10,Ingeniero de Datos,1,30000.00
+11,Especialista APIs,1,30000.00
+12,Arquitecto de Seguridad,1,50000.00
+13,Analista de Seguridad,1,40000.00
+14,Ingeniero Pruebas Seguridad,1,35000.00
+15,Líder Equipo (Máster),1,27000.00
+16,Desarrollador Senior,1,34500.00
+17,Desarrollador Junior,1,24000.00
+18,Analista de Calidad,1,22500.00
+19,Arquitecto DevOps,1,12500.00
+20,Ingeniero SRE,1,9500.00
+21,Analista Mesa de Ayuda,1,6000.00

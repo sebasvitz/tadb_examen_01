@@ -1,5 +1,9 @@
 # tadb_examen_01
 
+# Integrantes:
+Natalia Urrego 000365937
+Sebastián Villa 000505962
+
 # Estructura del proyecto: 
 ## Resumen del Dominio del Problema
 

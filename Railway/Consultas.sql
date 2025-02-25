@@ -11,7 +11,7 @@ SELECT
 FROM empleados e
 JOIN equipos eq ON e.id_equipo = eq.id
 JOIN asignacionEquipo_PI a ON eq.id = a.id_equipo
-JOIN pis p ON a.id_pi = p.id
+JOIN Pis p ON a.id_pi = p.id
 JOIN sprints s ON p.id = s.id_pi
 JOIN cargos c ON e.id_cargo = c.id
 ORDER BY e.id, s.id;
@@ -27,7 +27,7 @@ FROM pagosQuincenales pq
 JOIN empleados e ON pq.id_empleado = e.id
 JOIN cargos c ON e.id_cargo = c.id
 JOIN sprints s ON pq.id_sprint = s.id  
-JOIN pis p ON s.id_pi = p.id  
+JOIN Pis p ON s.id_pi = p.id  
 GROUP BY pq.id, c.nombre_cargo
 ORDER BY pq.id, total_pagado DESC;
 
@@ -54,3 +54,4 @@ JOIN (
 ) AS sub ON e.id = sub.id_empleado
 GROUP BY c.nombre_cargo
 ORDER BY total_pagado DESC;
+

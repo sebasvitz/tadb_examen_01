@@ -1,3 +1,6 @@
+# Hecho por
+Sebastián Villa Vargas 000505962
+
 # Configuración de la Base de Datos en Railway
 
 Este directorio contiene los archivos necesarios para configurar y conectarse a una base de datos en la nube utilizando **Railway**.

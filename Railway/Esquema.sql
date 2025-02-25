@@ -1,4 +1,18 @@
--- Creación de tablas
+-- Sebastián Villa Vargas 000505962
+
+-------------------------- Creación de Usuario con los permisos minimos ----------------
+CREATE USER 'user1'@'%' IDENTIFIED BY 'c0ntr4señ4';
+GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE ON nomina_db.* TO 'user1'@'%';
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'user1'@'%';
+
+
+
+
+-- Creación de tablas --
+
+
+
 
 -- Tabla Departamentos
 CREATE TABLE departamentos (

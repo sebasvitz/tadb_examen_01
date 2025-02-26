@@ -1,0 +1,23 @@
+|id |nombre_cargo               |total_empleados|total_pagado|
+|---|---------------------------|---------------|------------|
+|1  |Director de Proyecto       |1              |68.750      |
+|2  |Líder  Técnico             |1              |56.250      |
+|3  |Líder Financiero           |1              |53.750      |
+|4  |Arquitecto UX              |1              |20.000      |
+|5  |Diseñador UI               |1              |16.500      |
+|6  |Investigador UX            |1              |18.000      |
+|7  |Diseñador de Interacción   |1              |16.500      |
+|8  |Arquitecto de Soluciones   |1              |37.500      |
+|9  |Arquitecto de Datos        |1              |33.750      |
+|10 |Ingeniero de Datos         |1              |30.000      |
+|11 |Especialista APIs          |1              |30.000      |
+|12 |Arquitecto de Seguridad    |2              |50.000      |
+|13 |Analista de Seguridad      |2              |40.000      |
+|14 |Ingeniero Pruebas Seguridad|2              |35.000      |
+|15 |Líder Equipo (Máster)      |5              |27.000      |
+|16 |Desarrollador Senior       |5              |34.500      |
+|17 |Desarrollador Junior       |5              |24.000      |
+|18 |Analista de Calidad        |5              |22.500      |
+|19 |Arquitecto DevOps          |1              |12.500      |
+|20 |Ingeniero SRE              |1              |9.500       |
+|21 |Analista Mesa de Ayuda     |1              |6.000       |

@@ -171,6 +171,136 @@ COMMENT ON COLUMN pagosQuincenales.id IS 'Id de los pagos de la quincena';
 COMMENT ON COLUMN pagosQuincenales.id_empleado IS 'Clave foránea que referencia al empleado que recibe el pago.';
 COMMENT ON COLUMN pagosQuincenales.id_sprint IS 'Clave foránea que referencia al sprint correspondiente al pago.';
 
---- vistas, secuencias, 
---funciones, y 
-----procedimiento
+-- Añadir datos en la tabla pagosQuincenales. 
+
+INSERT INTO pagosQuincenales (id_empleado, id_sprint, monto)
+SELECT 
+    e.id AS id_empleado, 
+    s.id AS id_sprint, 
+    c.remuneracion_quincena AS monto
+FROM empleados e
+JOIN equipos eq ON e.id_equipo = eq.id
+JOIN asignacionEquipo_PI a ON eq.id = a.id_equipo
+JOIN pis p ON a.id_pi = p.id
+JOIN sprints s ON p.id = s.id_pi
+JOIN cargos c ON e.id_cargo = c.id
+ORDER BY e.id, s.id;
+
+----------------vistas--------------------------------
+
+
+
+----procedimiento--------------
+
+
+
+
+-- Se crea la tabla temporal antes de realizar el procedimiento
+-- debido a que postgresql elimina las tablas temporales luego de finalizar procedimientos
+-- con esto evitamos ese error.
+
+CREATE TEMP TABLE nomina_temp (
+    id_quincena INT,
+    id_departamento INT,
+    total_empleados_departamento INT,
+    valor NUMERIC(10,2)
+);
+
+
+
+
+CREATE OR REPLACE PROCEDURE p_calcula_nomina_quincena(IN quincena_deseada INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+   CREATE TEMP TABLE IF NOT EXISTS nomina_temp (
+       id_quincena INT,
+       id_departamento INT,
+       total_empleados_departamento INT,
+       valor NUMERIC(10,2)
+   ) ON COMMIT DROP;
+
+   -- Limpiar la tabla antes de insertar nuevos datos
+   TRUNCATE TABLE nomina_temp;
+
+   -- Insertar los datos en la tabla temporal
+   INSERT INTO nomina_temp (id_quincena, id_departamento, total_empleados_departamento, valor)
+   SELECT
+       s.id AS id_quincena,
+       d.id AS id_departamento,
+       COUNT(e.id) AS total_empleados_departamento,
+       SUM(pq.monto) AS valor
+   FROM pagosQuincenales pq
+   JOIN empleados e ON pq.id_empleado = e.id
+   JOIN cargos c ON e.id_cargo = c.id
+   JOIN departamentos d ON c.id_departamento = d.id
+   JOIN sprints s ON pq.id_sprint = s.id
+   WHERE s.id = quincena_deseada
+   GROUP BY s.id, d.id;
+
+   RAISE NOTICE 'Cálculo de nómina completado para la quincena %', quincena_deseada;
+END $$;
+
+
+-- llamamos el procedimiento y le damos el id de la quincena que queremos consultar
+
+CALL p_calcula_nomina_quincena(10);
+
+
+-- revisamos el resultado de la consulta
+
+SELECT * FROM nomina_temp;
+
+
+-- ahora creamos una tabla normal para poder exportar los datos
+-- (ya que de una temporal no podemos) 
+CREATE TABLE IF NOT EXISTS nomina_export AS 
+SELECT * FROM nomina_temp;
+
+-- Revisamos que tenga los mismos datos de la tabla temporal y exportamos
+SELECT * FROM nomina_export;
+
+-- eliminamos la tabla
+DROP TABLE nomina_export;
+
+
+-----------------------funciones----------------------------
+
+-- f_calcula_costo_departamento_quincena-------------
+
+CREATE OR REPLACE FUNCTION f_calcula_costo_departamento_quincena(
+    p_quincena INT,
+    p_departamento INT
+) RETURNS NUMERIC(10,2) 
+LANGUAGE plpgsql
+AS $$
+DECLARE 
+    v_total NUMERIC(10,2);
+BEGIN
+    -- Calcular la suma de los salarios de todos los empleados del departamento en la quincena dada
+    SELECT COALESCE(SUM(pq.monto), 0) 
+    INTO v_total
+    FROM pagosQuincenales pq
+    JOIN empleados e ON pq.id_empleado = e.id
+    JOIN equipos eq ON e.id_equipo = eq.id
+    JOIN departamentos d ON eq.id_departamento = d.id
+    WHERE pq.id_sprint = p_quincena
+      AND d.id = p_departamento;
+
+    RETURN v_total;
+END $$;
+
+------como usarla-----
+
+SELECT f_calcula_costo_departamento_quincena(4, 1);
+
+----para validar-----
+
+SELECT SUM(pq.monto) AS total_pagado
+FROM pagosQuincenales pq
+JOIN empleados e ON pq.id_empleado = e.id
+JOIN equipos eq ON e.id_equipo = eq.id
+WHERE pq.id_sprint = 4 -- Quincena
+ AND eq.id_departamento = 1;
+
+

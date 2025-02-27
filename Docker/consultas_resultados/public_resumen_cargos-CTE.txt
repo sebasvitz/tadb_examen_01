@@ -1,0 +1,21 @@
+1, Arquitecto DevOps, 5000
+1, Arquitecto UX, 8000
+1, Ingeniero de Datos, 12000
+1, Investigador UX, 7200
+2, Analista de Seguridad, 32000
+1, Líder Técnico, 22500
+5, Analista de Calidad, 24000
+1, Especialista APIs, 12000
+1, Arquitecto de Datos, 13500
+1, Analista Mesa de Ayuda, 2400
+1, Líder Financiero, 21500
+2, Arquitecto de Seguridad, 40000
+5, Líder Equipo (Máster), 28800
+1, Diseñador UI, 6600
+2, Ingeniero Pruebas Seguridad, 28000
+1, Diseñador de Interacción, 6600
+1, Ingeniero SRE, 3800
+1, Director de Proyecto, 27500
+1, Arquitecto de Soluciones, 15000
+5, Desarrollador Junior, 25600
+5, Desarrollador Senior, 36800
